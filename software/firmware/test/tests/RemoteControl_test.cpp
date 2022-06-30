@@ -36,7 +36,7 @@ TEST(RemoteControl_test, setup){
 }
 
 TEST(RemoteControl_test, tick){
-	mock().expectNoCall("BLEDevice::poll");
+	mock().expectOneCall("BLEDevice::poll");
 	mock().ignoreOtherCalls();
 	RemoteControl::tick();
 }
