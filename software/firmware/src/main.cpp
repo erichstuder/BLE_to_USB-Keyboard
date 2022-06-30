@@ -1,9 +1,10 @@
 #include <Arduino.h>
+#include "RemoteControl.h"
 
-void setup() {
-  // put your setup code here, to run once:
+void setup(){
+	RemoteControl::setup();
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+void loop(){
+	RemoteControl::tick();
 }
