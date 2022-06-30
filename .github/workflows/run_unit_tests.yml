@@ -15,4 +15,4 @@ jobs:
       - name: run unit tests
         run: |
           cd software/firmware/test
-          docker-compose run cpputest make all
+          ./runTests.sh
