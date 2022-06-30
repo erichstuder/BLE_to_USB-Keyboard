@@ -1,4 +1,4 @@
-name: run_unit_tests
+name: firmware_run_unit_tests
 
 on:
   push:
