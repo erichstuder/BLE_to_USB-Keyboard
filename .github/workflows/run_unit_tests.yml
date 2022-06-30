@@ -15,4 +15,4 @@ jobs:
       - name: run unit tests
         run: |
           cd software/firmware
-          ./runTets.sh
+          ./runTests.sh
