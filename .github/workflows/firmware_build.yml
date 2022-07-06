@@ -17,4 +17,4 @@ jobs:
         sketch-paths: |
           - software/firmware
         libraries: |
-          - Mbed BLE HID@v1.3.0
+          - name: Mbed BLE HID@v1.3.0
