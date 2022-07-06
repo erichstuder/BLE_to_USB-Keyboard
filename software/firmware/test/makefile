@@ -24,7 +24,7 @@ endif
 # SRC_DIRS specifies directories containing
 # production code C and CPP files.
 #SRC_FILES +=
-SRC_DIRS += ../src
+SRC_DIRS += ..
 
 # --- TEST_SRC_FILES and TEST_SRC_DIRS ---
 # Test files are always included in the build.
@@ -50,7 +50,7 @@ CPPUTEST_USE_EXTENSIONS = Y
 # containing directory
 INCLUDE_DIRS += $(CPPUTEST_HOME)/include
 INCLUDE_DIRS += $(CPPUTEST_HOME)/include/Platforms/Gcc
-INCLUDE_DIRS += ../include
+INCLUDE_DIRS += ..
 
 # --- CPPUTEST_OBJS_DIR ---
 # CPPUTEST_OBJS_DIR lets you control where the

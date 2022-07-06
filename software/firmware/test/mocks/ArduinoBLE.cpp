@@ -2,7 +2,7 @@
 #include "CppUTestExt/MockSupport.h"
 #include "ArduinoBLE.h"
 
-static BLECharacteristicEventHandler myEventHandler;
+/*static BLECharacteristicEventHandler myEventHandler;
 
 byte BLECharacteristic::value(){
 	mock().actualCall("BLECharacteristic::value");
@@ -64,4 +64,4 @@ BLEDevice BLELocalDevice::central(){
 }
 
 BLELocalDevice BLEObj;
-BLELocalDevice& BLE = BLEObj;
+BLELocalDevice& BLE = BLEObj;*/
