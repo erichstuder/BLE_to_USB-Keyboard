@@ -1,10 +1,10 @@
 #include <Arduino.h>
-#include "RemoteControl.h"
+#include "Application.h"
 
 void setup(){
-	RemoteControl::setup();
+	Application::setup();
 }
 
 void loop(){
-	RemoteControl::tick();
+	Application::loop();
 }
