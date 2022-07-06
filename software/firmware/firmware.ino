@@ -1,8 +1,7 @@
 /*
 Boards Manager:  Arduino Mbed OS Nano Boards v3.1.1
-Library Manager: Mbed BLE HID v1.3.0
 Board: Arduino Nano 33 BLE (https://store.arduino.cc/products/arduino-nano-33-ble)
-See also the workflow files for versions.
+See the build-workflow for libraries with versions.
 
 Note:
 Using arduino project as a workaround.
