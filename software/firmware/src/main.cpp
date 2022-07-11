@@ -1,10 +1,10 @@
 #include <Arduino.h>
-#include "Application.h"
+#include "App.h"
 
 void setup(){
-	Application::setup();
+	App::setup();
 }
 
 void loop(){
-	Application::loop();
+	App::tick();
 }

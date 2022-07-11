@@ -1,5 +1,5 @@
 #pragma once
-
+/*
 typedef enum {
 	//PullNone,
 	//PullDown,
@@ -18,12 +18,19 @@ typedef enum {
   //FALLING = 3,
   //RISING  = 4,
 } PinStatus;
-
+*/
 typedef uint8_t byte;
-typedef uint8_t pin_size_t;
+/*typedef uint8_t pin_size_t;
 
 unsigned long millis(void);
 void pinMode(pin_size_t pin, PinMode mode);
 void digitalWrite(pin_size_t pin, PinStatus val);
 
 void delay(unsigned long ms);
+*/
+
+class String{
+public:
+	String(const char *cstr = "");
+	const char* c_str();
+};

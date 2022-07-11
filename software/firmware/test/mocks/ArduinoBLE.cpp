@@ -2,7 +2,7 @@
 #include "CppUTestExt/MockSupport.h"
 #include "ArduinoBLE.h"
 
-static BLECharacteristicEventHandler myEventHandler;
+/*static BLECharacteristicEventHandler myEventHandler;
 
 byte BLECharacteristic::value(){
 	mock().actualCall("BLECharacteristic::value");
@@ -14,8 +14,9 @@ int BLECharacteristic::writeValue(byte value){
 		.withParameter("value", value);
 	return 1;
 }
-
+*/
 BLEService::BLEService(const char* uuid){}
+
 void BLEService::addCharacteristic(BLECharacteristic& characteristic){
 	mock().actualCall("BLEService::addCharacteristic");
 }
@@ -23,11 +24,25 @@ void BLEService::addCharacteristic(BLECharacteristic& characteristic){
 void BLEDevice::poll(){
 	mock().actualCall("BLEDevice::poll");
 }
-
+/*
 BLEByteCharacteristic::BLEByteCharacteristic(const char* uuid, unsigned char properties){}
+*/
 
-void BLEByteCharacteristic::setEventHandler(int event, BLECharacteristicEventHandler eventHandler){
-	mock().actualCall("BLEByteCharacteristic::setEventHandler")
+BLEStringCharacteristic::BLEStringCharacteristic(const char* uuid, unsigned char properties, int valueSize){}
+
+int BLEStringCharacteristic::writeValue(const String& value){
+	mock().actualCall("BLEStringCharacteristic::writeValue")
+		;//.withParameter("value", value);
+	return 1;
+}
+
+String BLEStringCharacteristic::value(void){
+	mock().actualCall("BLEStringCharacteristic::value");
+	return NULL;
+}
+
+void BLEStringCharacteristic::setEventHandler(int event, BLECharacteristicEventHandler eventHandler){
+	mock().actualCall("BLEStringCharacteristic::setEventHandler")
 		.withParameter("event", event);
 	mock().setData("eventHandler", (void*)eventHandler);
 	CHECK(eventHandler != NULL);

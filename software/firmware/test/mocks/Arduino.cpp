@@ -1,6 +1,11 @@
 #include "CppUTestExt/MockSupport.h"
 #include "Arduino.h"
 
+String::String(const char *cstr){}
+
+const char* String::c_str(){ return NULL; }
+
+/*
 void pinMode(pin_size_t pin, PinMode mode){
 	mock().actualCall("pinMode")
 		.withParameter("pin", pin)
@@ -22,3 +27,4 @@ unsigned long millis(void){
 	mock().actualCall("millis");
 	return mock().returnIntValueOrDefault(0);
 }
+*/
