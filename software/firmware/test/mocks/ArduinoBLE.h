@@ -20,11 +20,7 @@ enum BLECharacteristicEvent {
   //BLECharacteristicEventLast
 };
 
-class BLECharacteristic{
-public:
-	//byte value();
-	//int writeValue(byte value);
-};
+class BLECharacteristic{};
 
 class BLEService{
 public:
@@ -38,13 +34,7 @@ public:
 };
 
 typedef void (*BLECharacteristicEventHandler)(BLEDevice device, BLECharacteristic characteristic);
-/*
-class BLEByteCharacteristic : public BLECharacteristic{
-public:
-	BLEByteCharacteristic(const char* uuid, unsigned char properties);
-	void setEventHandler(int event, BLECharacteristicEventHandler eventHandler);
-};
-*/
+
 class BLEStringCharacteristic : public BLECharacteristic{
 public:
 	BLEStringCharacteristic(const char* uuid, unsigned char properties, int valueSize);

@@ -2,19 +2,6 @@
 #include "CppUTestExt/MockSupport.h"
 #include "ArduinoBLE.h"
 
-/*static BLECharacteristicEventHandler myEventHandler;
-
-byte BLECharacteristic::value(){
-	mock().actualCall("BLECharacteristic::value");
-	return mock().returnIntValueOrDefault(0);
-}
-
-int BLECharacteristic::writeValue(byte value){
-	mock().actualCall("BLECharacteristic::writeValue")
-		.withParameter("value", value);
-	return 1;
-}
-*/
 BLEService::BLEService(const char* uuid){}
 
 void BLEService::addCharacteristic(BLECharacteristic& characteristic){
@@ -24,21 +11,18 @@ void BLEService::addCharacteristic(BLECharacteristic& characteristic){
 void BLEDevice::poll(){
 	mock().actualCall("BLEDevice::poll");
 }
-/*
-BLEByteCharacteristic::BLEByteCharacteristic(const char* uuid, unsigned char properties){}
-*/
 
 BLEStringCharacteristic::BLEStringCharacteristic(const char* uuid, unsigned char properties, int valueSize){}
 
 int BLEStringCharacteristic::writeValue(const String& value){
 	mock().actualCall("BLEStringCharacteristic::writeValue")
-		;//.withParameter("value", value);
+		.withStringParameter("value", value.c_str());
 	return 1;
 }
 
 String BLEStringCharacteristic::value(void){
 	mock().actualCall("BLEStringCharacteristic::value");
-	return NULL;
+	return *(static_cast<String*>(mock().pointerReturnValue()));
 }
 
 void BLEStringCharacteristic::setEventHandler(int event, BLECharacteristicEventHandler eventHandler){
@@ -60,7 +44,7 @@ bool BLELocalDevice::setAdvertisedService(const BLEService& service){
 
 bool BLELocalDevice::setLocalName(const char *localName){
 	mock().actualCall("BLELocalDevice::setLocalName")
-		.withParameter("localName", "TurnTable");
+		.withParameter("localName", localName);
 	return true;
 }
 

@@ -1,9 +1,17 @@
 #include "CppUTestExt/MockSupport.h"
 #include "Arduino.h"
+#include <cstring>
 
-String::String(const char *cstr){}
 
-const char* String::c_str(){ return NULL; }
+String::String(const char *cstr){
+	size_t len = strlen(cstr);
+	memcpy(buffer, cstr, len);
+	buffer[len] = '\0';
+}
+
+const char* String::c_str() const{
+	return this->buffer;
+}
 
 /*
 void pinMode(pin_size_t pin, PinMode mode){

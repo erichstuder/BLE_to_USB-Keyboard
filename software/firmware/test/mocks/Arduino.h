@@ -1,4 +1,5 @@
 #pragma once
+
 /*
 typedef enum {
 	//PullNone,
@@ -32,5 +33,7 @@ void delay(unsigned long ms);
 class String{
 public:
 	String(const char *cstr = "");
-	const char* c_str();
+	const char* c_str() const;
+protected:
+	char buffer[255];
 };

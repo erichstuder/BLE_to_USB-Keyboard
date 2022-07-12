@@ -5,11 +5,6 @@
 #include "ArduinoBLE.h"
 #include "App.h"
 
-//static void setState_Mock(Drive::State state){
-//	mock().actualCall("setState_Mock")
-//		.withParameter("state", (int)state);
-//}
-
 TEST_GROUP(App_test){
 	void setup(){}
 	void teardown(){
@@ -19,75 +14,41 @@ TEST_GROUP(App_test){
 };
 
 TEST(App_test, setup){
-	/*mock().expectOneCall("BLELocalDevice::begin");
+	mock().expectOneCall("BLELocalDevice::begin");
 	mock().expectOneCall("BLELocalDevice::setLocalName")
-		.withParameter("localName", "TurnTable");
+		.withParameter("localName", "BLE_to_USB-Keyboard");
 	mock().expectOneCall("BLELocalDevice::setAdvertisedService");
 	mock().expectOneCall("BLEService::addCharacteristic");
 	mock().expectOneCall("BLELocalDevice::addService");
-	mock().expectOneCall("BLEByteCharacteristic::setEventHandler")
+	mock().expectOneCall("BLEStringCharacteristic::setEventHandler")
 		.withParameter("event", 3);
-	mock().expectOneCall("BLECharacteristic::writeValue")
-		.withParameter("value", 0);
+	mock().expectOneCall("BLEStringCharacteristic::writeValue")
+		.withParameter("value", "");
 	mock().expectOneCall("BLELocalDevice::central");
 	mock().expectOneCall("BLELocalDevice::advertise");
 
-	App::setup();*/
+	App::setup();
 }
 
 TEST(App_test, tick){
 	mock().expectOneCall("BLEDevice::poll");
-	mock().ignoreOtherCalls();
 	App::tick();
 }
 
-/*TEST(App_test, tick_noTimeout){
-	UT_PTR_SET(Drive::setState, setState_Mock);
-	mock().expectOneCall("millis")
-		.andReturnValue(100);
-	mock().expectNoCall("setState_Mock");
-	mock().ignoreOtherCalls();
-	App::tick();
-}*/
-/*
-TEST(App_test, tick_timeout){
-	UT_PTR_SET(Drive::setState, setState_Mock);
-	mock().expectOneCall("millis")
-		.andReturnValue(101);
-	mock().expectOneCall("setState_Mock")
-		.withParameter("state", (int)Drive::State::Stopped);
-	mock().ignoreOtherCalls();
-	App::tick();
-}*/
-/*
-TEST(App_test, writteHandler){
-	typedef struct{
-		byte characteristicValue;
-		Drive::State expectedState;
-	} ValueToState;
-
-	ValueToState valueToState[] = { { 0x00, Drive::State::Stopped          },
-	                                { 0x01, Drive::State::Clockwise        },
-	                                { 0x02, Drive::State::Counterclockwise },
-	                                { 0x03, Drive::State::Stopped          },
-								  };
-
+TEST(App_test, writtenHandler){
 	mock().disable();
 	App::setup();
 	mock().enable();
 	BLECharacteristicEventHandler writtenHandler = (BLECharacteristicEventHandler)mock().getData("eventHandler").getPointerValue();
 	
 	BLEDevice bleDeviceDummy;
-	BLECharacteristic bleCharacteristicDummy;
-	UT_PTR_SET(Drive::setState, setState_Mock);
-	for(uint n=0; n < sizeof(valueToState) / sizeof(valueToState[0]); n++){
-		mock().expectOneCall("BLECharacteristic::value")
-			.andReturnValue(valueToState[n].characteristicValue);
-		mock().expectOneCall("setState_Mock")
-			.withParameter("state", (int)(valueToState[n].expectedState));
-		mock().expectOneCall("millis");
-		mock().ignoreOtherCalls();
+	BLEStringCharacteristic bleStringCharacteristicDummy("dummyUUID", 0, 0);
 
-		writtenHandler(bleDeviceDummy, bleCharacteristicDummy);
-	}
-}*/
+	String text = ("this is a test");
+	mock().expectOneCall("BLEStringCharacteristic::value")
+		.andReturnValue(&text);
+	mock().expectOneCall("USBKeyboard::printf")
+		.withParameter("format", text.c_str());
+
+	writtenHandler(bleDeviceDummy, bleStringCharacteristicDummy);
+}
