@@ -1,6 +1,6 @@
 #pragma once
 
-namespace App{
+namespace app{
 	void setup();
 	void tick();
 }

@@ -1,9 +1,10 @@
 #include <Arduino.h>
 #include <ArduinoBLE.h>
 #include <USBKeyboard.h>
-#include "App.h"
+#include "app.h"
+#include "bleRemoteHandler.h"
 
-namespace App{
+namespace app{
 	// UUID considerations:
 	// Avoid Base UUID.
 	// Base UUID: 00000000-0000-1000-8000-00805F9B34FB
@@ -15,10 +16,11 @@ namespace App{
 
 	static USBKeyboard Keyboard;
 
-	static void writtenHandler(BLEDevice device, BLECharacteristic characteristic);
+	//static void writtenHandler(BLEDevice device, BLECharacteristic characteristic);
+	static void updateHandler(byte value);
 
 	void setup(){
-		while(!BLE.begin());
+		/*while(!BLE.begin());
 		BLE.setLocalName("BLE_to_USB-Keyboard");
 		BLE.setAdvertisedService(keyboardInputService);
 		keyboardInputService.addCharacteristic(keyboardInputCharacteristic);
@@ -26,15 +28,25 @@ namespace App{
 		keyboardInputCharacteristic.setEventHandler(BLEWritten, writtenHandler);
 		keyboardInputCharacteristic.writeValue(""); //set initial value
 		remoteControl = BLE.central();
-		BLE.advertise();
+		BLE.advertise();*/
+
+		bleRemoteHandler::init(updateHandler);
+		delay(1000);
+		Keyboard.printf("setup done");
+
 	}
 
 	void tick(){
-		remoteControl.poll();
+		//remoteControl.poll();
+		bleRemoteHandler::tick();
 	}
 
-	static void writtenHandler(BLEDevice device, BLECharacteristic characteristic){
+	/*static void writtenHandler(BLEDevice device, BLECharacteristic characteristic){
 		String input = keyboardInputCharacteristic.value();
 		Keyboard.printf(input.c_str());
+	}*/
+
+	static void updateHandler(byte value){
+		Keyboard.printf("value %d\n", value);
 	}
 }
